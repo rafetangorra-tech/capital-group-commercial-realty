@@ -1,5 +1,12 @@
 import Image from "next/image";
 
+// next/image with `unoptimized` does not prepend basePath to a string src,
+// so under GitHub Pages (served at /<repo>/) we add it ourselves.
+const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || "";
+function withBase(src: string): string {
+  return src.startsWith("/") ? `${BASE_PATH}${src}` : src;
+}
+
 /**
  * PropertyMedia — art-directed placeholder plate or real photograph.
  *
@@ -52,7 +59,7 @@ export function PropertyMedia({
     return (
       <div className={`overflow-hidden ${className}`}>
         <Image
-          src={image}
+          src={withBase(image)}
           alt={alt}
           fill
           priority={priority}
