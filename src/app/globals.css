@@ -1,0 +1,157 @@
+@import "tailwindcss";
+
+/*
+  Capital Group Commercial Realty — brand system
+  Register: cinematic luxury (Waldorf Astoria Residences), editorial restraint.
+  Palette: deep navy ink · warm brass gold · bone paper.
+*/
+
+:root {
+  /* Core palette */
+  --ink: #0c1620;          /* near-black navy — primary dark ground */
+  --ink-soft: #1b2a38;     /* softer navy for panels */
+  --ink-line: #24384a;     /* hairlines on dark */
+  --slate: #5b6772;        /* muted body text on light */
+  --slate-soft: #8a939c;   /* captions / meta */
+
+  --paper: #f6f2ea;        /* warm bone — primary light ground */
+  --paper-2: #efe9dd;      /* slightly deeper bone panel */
+  --paper-line: rgba(12, 22, 32, 0.12);
+
+  --gold: #b0894b;         /* muted brass accent */
+  --gold-light: #cbae79;   /* lighter brass for on-dark accents */
+  --gold-wash: rgba(176, 137, 75, 0.12);
+
+  --white: #ffffff;
+
+  --background: var(--paper);
+  --foreground: var(--ink);
+}
+
+@theme inline {
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-ink-line: var(--ink-line);
+  --color-slate: var(--slate);
+  --color-slate-soft: var(--slate-soft);
+  --color-paper: var(--paper);
+  --color-paper-2: var(--paper-2);
+  --color-gold: var(--gold);
+  --color-gold-light: var(--gold-light);
+  --color-white: var(--white);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-cormorant), ui-serif, Georgia, serif;
+
+  --tracking-luxe: 0.28em;
+
+  --breakpoint-xs: 30rem;
+}
+
+@layer base {
+  * {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-sans);
+    font-feature-settings: "kern", "liga", "calt";
+    text-rendering: optimizeLegibility;
+  }
+
+  /* Editorial display type */
+  .font-display {
+    font-family: var(--font-display);
+  }
+
+  ::selection {
+    background: var(--gold);
+    color: var(--white);
+  }
+}
+
+@layer components {
+  /* Wide letter-spaced small-caps label — the signature nav/label treatment */
+  .eyebrow {
+    font-family: var(--font-sans);
+    text-transform: uppercase;
+    letter-spacing: 0.28em;
+    font-size: 0.7rem;
+    font-weight: 500;
+    line-height: 1;
+  }
+
+  .eyebrow-sm {
+    text-transform: uppercase;
+    letter-spacing: 0.24em;
+    font-size: 0.62rem;
+    font-weight: 500;
+  }
+
+  /* Thin luxury button */
+  .btn-line {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    font-size: 0.68rem;
+    font-weight: 500;
+    padding: 0.95rem 1.9rem;
+    border: 1px solid currentColor;
+    transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    cursor: pointer;
+  }
+
+  .btn-solid {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    font-size: 0.68rem;
+    font-weight: 500;
+    padding: 0.95rem 1.9rem;
+    background: var(--ink);
+    color: var(--paper);
+    border: 1px solid var(--ink);
+    transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    cursor: pointer;
+  }
+
+  .btn-solid:hover {
+    background: var(--gold);
+    border-color: var(--gold);
+    color: var(--white);
+  }
+}
+
+/* Hide scrollbars on horizontal rails while keeping scroll */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Fine grain overlay used on dark cinematic sections */
+.grain::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.4;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+  mix-blend-mode: overlay;
+}
