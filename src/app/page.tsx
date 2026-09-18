@@ -139,7 +139,7 @@ export default function Home() {
         <PropertyMedia
           seed={7}
           index={3}
-          image="/images/hero-firm.png"
+          image="/images/hero-firm.jpg"
           className="absolute inset-0 h-full w-full opacity-45"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-ink via-ink/85 to-ink/40" />

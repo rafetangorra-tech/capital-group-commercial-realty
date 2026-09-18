@@ -86,30 +86,30 @@ skyline emblem) — easy to restyle, or replace with a supplied SVG.
 
 ---
 
-## Going live: wiring the inquiry form
+## Going live: the inquiry form
 
-Submissions currently validate and log server-side in
-**`src/app/api/inquiry/route.ts`**. To actually deliver them, add an email or CRM
-call where indicated (one function call). Example with [Resend](https://resend.com):
-
-```ts
-import { Resend } from "resend";
-const resend = new Resend(process.env.RESEND_API_KEY);
-await resend.emails.send({
-  from: "site@capitalgroupcr.com",
-  to: "info@capitalgroupcr.com",
-  subject: `New inquiry — ${inquiry.type}`,
-  text: JSON.stringify(inquiry, null, 2),
-});
-```
+The site is a **static export** (see Deployment), so the inquiry form composes a
+pre-addressed email to the firm via `mailto:` — no backend required. To capture
+leads programmatically instead, give the site a server (e.g. Vercel) and change
+`onSubmit` in **`src/components/inquiry-form.tsx`** to POST to an email/CRM
+endpoint (Resend, Formspree, a Next.js route handler, etc.).
 
 ---
 
 ## Deployment
 
-Optimized for **Vercel**: push to a Git repo and import. `npm run build` also
-works for any Node host. The build prerenders every page (listings are SSG) and
-serves the inquiry route on demand.
+Deploys automatically to **GitHub Pages** via `.github/workflows/deploy.yml` on
+every push to `main`:
+
+- The site is a **static export** (`output: "export"` in `next.config.ts`) → a
+  plain `out/` folder, no server needed.
+- Project Pages are served under `/<repo>/`, so the workflow builds with
+  `PAGES_BASE_PATH=/capital-group-commercial-realty` to set `basePath`. For a
+  root custom domain, drop that env var.
+- Live at **https://rafetangorra-tech.github.io/capital-group-commercial-realty/**.
+
+Prefer a server (for real form handling, image optimization, SSR)? It also runs
+on **Vercel** — remove `output: "export"` and import the repo.
 
 ## Notes
 

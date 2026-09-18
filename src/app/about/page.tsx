@@ -38,7 +38,7 @@ export default function AboutPage() {
         title="Institutional discipline. Boutique attention."
         subtitle={`Capital Group Commercial Realty advises owners and investors across the ${company.serviceArea}.`}
         seed={9}
-        image="/images/hero-firm.png"
+        image="/images/hero-firm.jpg"
       />
 
       {/* Intro */}
@@ -125,7 +125,7 @@ export default function AboutPage() {
         <PropertyMedia
           seed={13}
           index={1}
-          image="/images/hero-portfolio.png"
+          image="/images/hero-portfolio.jpg"
           className="absolute inset-0 h-full w-full opacity-45"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-ink via-ink/80 to-ink/40" />

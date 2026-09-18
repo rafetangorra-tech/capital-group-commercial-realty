@@ -25,7 +25,7 @@ export function CinematicHero() {
       <PropertyMedia
         seed={2}
         index={1}
-        image="/images/home-hero.png"
+        image="/images/home-hero.jpg"
         alt="Cinematic commercial building at twilight"
         className="absolute inset-0 h-full w-full"
         priority

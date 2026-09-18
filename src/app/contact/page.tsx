@@ -19,7 +19,7 @@ export default function ContactPage() {
         title="Let's talk about your property."
         subtitle="Whether you're selling, leasing, or looking to acquire — a direct conversation is the best place to start."
         seed={28}
-        image="/images/hero-contact.png"
+        image="/images/hero-contact.jpg"
         size="sm"
       />
 

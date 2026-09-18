@@ -1,7 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { Check, Loader2 } from "lucide-react";
+import { Check } from "lucide-react";
+import { company } from "@/data/site";
 
 type Tone = "light" | "dark";
 
@@ -29,26 +30,37 @@ export function InquiryForm({
   tone = "light",
   compact,
 }: Props) {
-  const [status, setStatus] = useState<"idle" | "sending" | "done" | "error">("idle");
+  const [status, setStatus] = useState<"idle" | "done">("idle");
   const dark = tone === "dark";
 
-  async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
+  // Static-site friendly: compose a pre-addressed email to the firm. Swap this
+  // for a POST to an email/CRM endpoint (Resend, Formspree, etc.) when a backend
+  // is available — see README.
+  function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    setStatus("sending");
     const form = e.currentTarget;
-    const data = Object.fromEntries(new FormData(form).entries());
-    try {
-      const res = await fetch("/api/inquiry", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...data, propertyAddress, propertySlug }),
-      });
-      if (!res.ok) throw new Error("bad response");
-      setStatus("done");
-      form.reset();
-    } catch {
-      setStatus("error");
-    }
+    const d = Object.fromEntries(new FormData(form).entries()) as Record<string, string>;
+    const subject = `Website Inquiry — ${d.type || "General"}${
+      propertyAddress ? ` — ${propertyAddress}` : ""
+    }`;
+    const body = [
+      `Name: ${d.name ?? ""}`,
+      `Email: ${d.email ?? ""}`,
+      `Phone: ${d.phone ?? ""}`,
+      `Inquiry type: ${d.type ?? ""}`,
+      propertyAddress ? `Property: ${propertyAddress}` : "",
+      propertySlug ? `Listing: ${propertySlug}` : "",
+      "",
+      d.message ?? "",
+    ]
+      .filter(Boolean)
+      .join("\n");
+    const href = `mailto:${company.email}?subject=${encodeURIComponent(
+      subject,
+    )}&body=${encodeURIComponent(body)}`;
+    if (typeof window !== "undefined") window.location.href = href;
+    setStatus("done");
+    form.reset();
   }
 
   const fieldBase = dark
@@ -67,8 +79,13 @@ export function InquiryForm({
           <Check className="h-6 w-6" />
         </span>
         <p className="font-display text-3xl font-light">Thank you.</p>
-        <p className={dark ? "text-paper/70" : "text-slate"}>
-          Your inquiry has reached the firm. An advisor will be in touch shortly.
+        <p className={`max-w-sm ${dark ? "text-paper/70" : "text-slate"}`}>
+          We&rsquo;ve opened a pre-addressed email in your mail app — just press
+          send and an advisor will be in touch. Prefer to talk?{" "}
+          <a href={company.phoneHref} className="text-gold hover:underline">
+            {company.phone}
+          </a>
+          .
         </p>
         <button onClick={() => setStatus("idle")} className={`btn-line mt-4 ${dark ? "text-paper" : "text-ink"}`}>
           Send Another
@@ -125,30 +142,8 @@ export function InquiryForm({
         />
       </label>
 
-      {status === "error" && (
-        <p className="text-sm text-red-400">
-          Something went wrong. Please call {""}
-          <a href="tel:+15164268931" className="underline">
-            (516) 426-8931
-          </a>{" "}
-          or try again.
-        </p>
-      )}
-
-      <button
-        type="submit"
-        disabled={status === "sending"}
-        className={`btn-solid w-full justify-center sm:w-auto ${
-          status === "sending" ? "opacity-70" : ""
-        }`}
-      >
-        {status === "sending" ? (
-          <>
-            <Loader2 className="h-4 w-4 animate-spin" /> Sending
-          </>
-        ) : (
-          "Submit Inquiry"
-        )}
+      <button type="submit" className="btn-solid w-full justify-center sm:w-auto">
+        Submit Inquiry
       </button>
 
       <p className={`text-xs ${dark ? "text-slate-soft" : "text-slate-soft"}`}>
