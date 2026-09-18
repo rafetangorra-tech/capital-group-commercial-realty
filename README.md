@@ -58,8 +58,11 @@ Everything the client-facing site says lives in two data files:
 
 ### Swapping in real photography
 
-Placeholder property imagery is generated as art-directed SVG "plates" so the
-site is self-contained and looks intentional out of the box. To use real photos:
+The site ships with **AI-generated placeholder photography** (in `public/images/`,
+generated with Higgsfield) so it looks finished out of the box — a cinematic home
+hero, page heroes, and 3 photos per listing. These are stand-ins to be replaced
+with real photography of the actual properties. If a listing has no `images`, an
+art-directed SVG "plate" renders as a final fallback. To use real photos:
 
 1. Drop images in `public/images/` (e.g. `public/images/1844-lansdowne/01.jpg`).
 2. On the listing, add an `images` array:

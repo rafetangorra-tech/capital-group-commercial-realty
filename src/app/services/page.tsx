@@ -42,6 +42,7 @@ export default function ServicesPage() {
         title="Full-service commercial advisory."
         subtitle="Four disciplines, one standard of care — from first valuation to final closing."
         seed={16}
+        image="/images/hero-services.png"
       />
 
       {/* Services detail */}

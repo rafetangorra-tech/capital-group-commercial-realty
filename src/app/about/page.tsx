@@ -38,6 +38,7 @@ export default function AboutPage() {
         title="Institutional discipline. Boutique attention."
         subtitle={`Capital Group Commercial Realty advises owners and investors across the ${company.serviceArea}.`}
         seed={9}
+        image="/images/hero-firm.png"
       />
 
       {/* Intro */}
@@ -121,7 +122,12 @@ export default function AboutPage() {
 
       {/* Market band */}
       <section className="relative overflow-hidden bg-ink text-paper">
-        <PropertyMedia seed={13} index={1} className="absolute inset-0 h-full w-full opacity-40" />
+        <PropertyMedia
+          seed={13}
+          index={1}
+          image="/images/hero-portfolio.png"
+          className="absolute inset-0 h-full w-full opacity-45"
+        />
         <div className="absolute inset-0 bg-gradient-to-r from-ink via-ink/80 to-ink/40" />
         <div className="relative mx-auto max-w-[1400px] px-5 py-28 sm:px-8 sm:py-36">
           <Reveal>

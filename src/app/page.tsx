@@ -136,7 +136,12 @@ export default function Home() {
 
       {/* Approach — cinematic dark band */}
       <section className="relative overflow-hidden bg-ink text-paper">
-        <PropertyMedia seed={7} index={3} className="absolute inset-0 h-full w-full opacity-40" />
+        <PropertyMedia
+          seed={7}
+          index={3}
+          image="/images/hero-firm.png"
+          className="absolute inset-0 h-full w-full opacity-45"
+        />
         <div className="absolute inset-0 bg-gradient-to-r from-ink via-ink/85 to-ink/40" />
         <div className="relative mx-auto grid max-w-[1400px] items-center gap-12 px-5 py-28 sm:px-8 lg:grid-cols-2 lg:py-40">
           <div>

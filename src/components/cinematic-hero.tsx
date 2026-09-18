@@ -22,7 +22,14 @@ export function CinematicHero() {
       data-hero
       className="relative h-[100svh] min-h-[640px] w-full overflow-hidden bg-ink text-paper"
     >
-      <PropertyMedia seed={2} index={1} className="absolute inset-0 h-full w-full" priority />
+      <PropertyMedia
+        seed={2}
+        index={1}
+        image="/images/home-hero.png"
+        alt="Cinematic commercial building at twilight"
+        className="absolute inset-0 h-full w-full"
+        priority
+      />
       {/* legibility gradient */}
       <div className="absolute inset-0 bg-gradient-to-b from-ink/70 via-ink/30 to-ink/80" />
       <div className="absolute inset-0 bg-gradient-to-r from-ink/60 to-transparent" />

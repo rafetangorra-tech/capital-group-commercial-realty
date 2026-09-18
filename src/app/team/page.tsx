@@ -28,6 +28,7 @@ export default function TeamPage() {
         title="The people behind the practice."
         subtitle="Principal-level attention on every assignment — you work directly with the advisors representing your property."
         seed={22}
+        image="/images/hero-team.png"
       />
 
       <section className="mx-auto max-w-[1400px] px-5 py-24 sm:px-8 sm:py-32">

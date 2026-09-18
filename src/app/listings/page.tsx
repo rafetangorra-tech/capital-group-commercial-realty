@@ -17,6 +17,7 @@ export default function ListingsPage() {
         title="Commercial properties, curated."
         subtitle="Investment sales, mixed-use, retail, office, industrial, and special-purpose assets across the New York metropolitan area."
         seed={4}
+        image="/images/hero-portfolio.png"
         size="sm"
       />
       <ListingsExplorer listings={listings} />
