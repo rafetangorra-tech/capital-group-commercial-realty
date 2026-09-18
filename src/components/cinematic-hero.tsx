@@ -45,14 +45,14 @@ export function CinematicHero() {
         >
           <span className="block text-paper/85">Commercial real estate,</span>
           <span className="relative mt-2 block h-[1.1em] overflow-hidden">
-            <AnimatePresence mode="wait">
+            <AnimatePresence>
               <motion.span
                 key={heroWords[i]}
                 className="absolute inset-0 flex items-center justify-center italic text-gold-light"
-                initial={{ opacity: 0, y: "60%" }}
+                initial={{ opacity: 0, y: "70%" }}
                 animate={{ opacity: 1, y: "0%" }}
-                exit={{ opacity: 0, y: "-60%" }}
-                transition={{ duration: 0.7, ease }}
+                exit={{ opacity: 0, y: "-70%" }}
+                transition={{ duration: 0.85, ease }}
               >
                 {toSentence(heroWords[i])}
               </motion.span>
